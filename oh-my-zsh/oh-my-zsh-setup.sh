@@ -6,10 +6,10 @@ git clone https://github.com/zdharma/fast-syntax-highlighting.git \
   ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 
 brew install zoxide
-export_ZO_DATA_DIR=$HOME/Library/Application
-export_ZO_ECHO=1
+export _ZO_DATA_DIR=$HOME/Library/Application
+export _ZO_ECHO=1
 zoxide init zsh --cmd z --hook pwd
-# put this in zshrc eval "$(zoxide init zsh)"
+# put this in zshrc eval "$(zoxide init zsh)" as well as the exports
 
 
 # powerlevel10k, restart terminal afterwards
