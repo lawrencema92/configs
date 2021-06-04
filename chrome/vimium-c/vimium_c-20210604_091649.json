@@ -1,0 +1,29 @@
+{
+	"name": "Vimium C",
+	"@time": "6/4/2021, 9:16:49 AM",
+	"time": 1622823409399,
+	"environment": {
+		"extension": "1.90.2",
+		"platform": "mac",
+		"chrome": 91
+	},
+	"grabBackFocus": true,
+	"ignoreKeyboardLayout": 1,
+	"keyMappings": [
+		"# Insert your preferred key mappings here.",
+		"unmap x",
+		"unmap X",
+		"unmap j",
+		"unmap k",
+		"unmap f",
+		"unmap F",
+		"unmap t",
+		"unmap r",
+		"unmap R",
+		"unmap /",
+		"unmap v",
+		"map ff LinkHints.activateMode",
+		"map fb LinkHints.activateModeToOpenInNewTab",
+		""
+	]
+}
