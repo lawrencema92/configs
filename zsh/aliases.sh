@@ -39,10 +39,11 @@ alias gst='git status'
 
 function convertEpoch() {
   local epoch_timestamp=$1
-  if [ $(echo -n $epoch_timestamp | wc -m) > 10 ]
+  if [ $(echo -n $epoch_timestamp | wc -m) -gt 12 ]
   then
     epoch_timestamp=${epoch_timestamp%???}
   fi
 
+  echo $1
   date -r $epoch_timestamp '+%m/%d/%Y:%H:%M:%S%Z'
 }
