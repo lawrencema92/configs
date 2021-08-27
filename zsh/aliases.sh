@@ -4,6 +4,10 @@ alias gaa='git add --all'
 alias gapa='git add --patch'
 alias gau='git add --update'
 
+function gct() {
+  git commit -m $1
+}
+
 # Check if main exists and use instead of master
 function git_main_branch() {
   command git rev-parse --git-dir &>/dev/null || return
@@ -17,6 +21,7 @@ function git_main_branch() {
   echo master
 }
 
+alias gh='git symbolic-ref --short HEAD'
 alias gb='git branch'
 alias gcm='git checkout $(git_main_branch)'
 alias gco='git checkout'
@@ -31,3 +36,13 @@ alias glog='git log --oneline --decorate --graph'
 alias gp='git push'
 
 alias gst='git status'
+
+function convertEpoch() {
+  local epoch_timestamp=$1
+  if [ $(echo -n $epoch_timestamp | wc -m) > 10 ]
+  then
+    epoch_timestamp=${epoch_timestamp%???}
+  fi
+
+  date -r $epoch_timestamp '+%m/%d/%Y:%H:%M:%S%Z'
+}
