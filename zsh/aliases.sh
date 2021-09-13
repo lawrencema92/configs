@@ -47,3 +47,5 @@ function convertEpoch() {
   echo $1
   date -r $epoch_timestamp '+%m/%d/%Y:%H:%M:%S%Z'
 }
+
+alias s3ls='aws s3 ls --human-readable'
