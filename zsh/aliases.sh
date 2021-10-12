@@ -49,3 +49,14 @@ function convertEpoch() {
 }
 
 alias s3ls='aws s3 ls --human-readable'
+
+function tf() {
+  if [ $1 = 'start' ]; then
+    echo 'here'
+    tfenv use 0.13.6
+    terraform init
+  else
+    echo 'rest'
+    terraform $@
+  fi
+}
