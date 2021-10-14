@@ -52,11 +52,12 @@ alias s3ls='aws s3 ls --human-readable'
 
 function tf() {
   if [ $1 = 'start' ]; then
-    echo 'here'
     tfenv use 0.13.6
     terraform init
   else
-    echo 'rest'
     terraform $@
   fi
 }
+
+alias connectVPN='osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "connect \"aiq-vpn\"" -e "end tell"'
+alias disconnectVPN='osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "disconnect \"aiq-vpn\"" -e "end tell"'
