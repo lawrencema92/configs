@@ -11,3 +11,7 @@ if command -v curl >/dev/null 2>&1; then
 else
   sh -c "$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
 fi
+
+# disable app store notifications
+defaults write com.apple.appstored LastUpdateNotification -date "3029-12-12 12:00:00 +0000"
+
