@@ -61,3 +61,5 @@ function tf() {
 
 alias connectVPN='osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "connect \"aiq-vpn\"" -e "end tell"'
 alias disconnectVPN='osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "disconnect \"aiq-vpn\"" -e "end tell"'
+
+alias parquet-dump='java -jar ~/dev/parquet-dump/target/scala-2.11/Parquet-Dump-assembly-1.1.1.jar'

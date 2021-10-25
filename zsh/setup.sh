@@ -14,4 +14,3 @@ fi
 
 # disable app store notifications
 defaults write com.apple.appstored LastUpdateNotification -date "3029-12-12 12:00:00 +0000"
-
