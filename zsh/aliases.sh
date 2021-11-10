@@ -48,7 +48,40 @@ function convertEpoch() {
   date -r $epoch_timestamp '+%m/%d/%Y:%H:%M:%S%Z'
 }
 
-alias s3ls='aws s3 ls --human-readable'
+function s3ls() {
+  if [[ $1 == s3://* ]]
+  then
+    local key=$(echo $1 | sed 's/s3:\/\///')
+  elif [[ $1 == s3a://* ]]
+  then
+    local key=$(echo $1 | sed 's/s3a:\/\///')
+  else
+    local key=$1
+  fi
+
+  aws s3 ls --human-readable $key
+}
+
+function s3cp() {
+  if [[ $1 == s3://* ]]
+  then
+    local key=$1
+  elif [[ $1 == s3a://* ]]
+  then
+    local key=$(echo $1 | sed 's/s3a:\/\//s3:\/\//')
+  else
+    local key=s3://$1
+  fi
+
+  if [ -z $2 ]
+  then
+    local dest=./
+  else
+    local dest=$2
+  fi
+
+  aws s3 cp $key $dest
+}
 
 function tf() {
   if [ $1 = 'start' ]; then
