@@ -26,16 +26,12 @@ alias gb='git branch'
 alias gcm='git checkout $(git_main_branch)'
 alias gco='git checkout'
 alias gd='git diff'
-
 alias gpsup='git push --set-upstream origin $(git symbolic-ref --short HEAD)'
-
 alias gl='git pull'
-
 alias glog='git log --oneline --decorate --graph'
-
 alias gp='git push'
-
 alias gst='git status'
+alias gsha='git rev-parse HEAD'
 
 function convertEpoch() {
   local epoch_timestamp=$1
