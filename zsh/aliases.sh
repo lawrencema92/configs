@@ -1,7 +1,6 @@
 # git aliases
 alias ga='git add'
-alias gaa='git add --all'
-alias gapa='git add --patch'
+alias gap='git add --patch'
 alias gau='git add --update'
 
 function gct() {
@@ -58,7 +57,7 @@ function s3ls() {
   aws s3 ls --human-readable $key
 }
 
-function s3cp() {
+function s3stream() {
   if [[ $1 == s3://* ]]
   then
     local key=$1
@@ -67,6 +66,26 @@ function s3cp() {
     local key=$(echo $1 | sed 's/s3a:\/\//s3:\/\//')
   else
     local key=s3://$1
+  fi
+
+  aws s3 cp $key -
+}
+
+function s3dl() {
+  if [[ $1 == s3://* ]]
+  then
+    local key=$1
+  elif [[ $1 == s3a://* ]]
+  then
+    local key=$(echo $1 | sed 's/s3a:\/\//s3:\/\//')
+  else
+    local key=s3://$1
+  fi
+
+  if [[ $2 == s3* ]]
+  then
+    echo "danger danger"
+    return 1
   fi
 
   if [ -z $2 ]
@@ -81,14 +100,71 @@ function s3cp() {
 
 function tf() {
   if [ $1 = 'start' ]; then
-    tfenv use 0.13.6
+    tfenv use 1.5.3
     terraform init
   else
     terraform $@
   fi
 }
 
-alias connectVPN='osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "connect \"aiq-vpn\"" -e "end tell"'
-alias disconnectVPN='osascript -e "tell application \"/Applications/Tunnelblick.app\"" -e "disconnect \"aiq-vpn\"" -e "end tell"'
+function getCustomer() {
+  ~/dev/tools/get_customer $@
+}
+
+function generateSuperAppConfigs() {
+  ~/aiq/aiq local-ansible $@ | tee /dev/tty | grep -i 'export aiq_config_path' | source /dev/stdin
+}
+
+function getTriggerStacks() {
+  local env="prod"
+  for i in "$@"; do
+    case $i in 
+      -e|--env)
+        shift
+        env=$1
+        shift
+        ;;
+      *)
+        ;;
+    esac
+  done
+
+  ~/aiq/aiq stack v2 list $env --app-name trigger-execution | sort
+}
+
+
+function getTriggerHosts() {
+  local env="prod"
+  local stack=$(~/aiq/aiq stack v2 list $env --app-name trigger-execution | sort | sed '/instances found/d' | sed '1!d')
+  local customersOnly=false
+
+  for i in "$@"; do
+    case $i in 
+      -e|--env)
+        shift
+        env=$1
+        shift
+        ;;
+      -s|--stack)
+        shift
+        stack=$1
+        shift
+        ;;
+      -c|--customers-only)
+        customersOnly=true
+        shift
+        ;;
+      *)
+        ;;
+    esac
+  done
+
+  if [[ $customersOnly ]] 
+  then
+    ~/aiq/aiq stack v2 list-hosts $env $stack trigger-execution | sort | awk -F. '{ print $2 }'
+  else
+    ~/aiq/aiq stack v2 list-hosts $env $stack trigger-execution | sort
+  fi
+}
 
 alias parquet-dump='java -jar ~/dev/parquet-dump/target/scala-2.11/Parquet-Dump-assembly-1.1.1.jar'
