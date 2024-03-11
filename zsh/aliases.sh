@@ -20,7 +20,7 @@ function git_main_branch() {
   echo master
 }
 
-alias gh='git symbolic-ref --short HEAD'
+alias ghd='git symbolic-ref --short HEAD'
 alias gb='git branch'
 alias gcm='git checkout $(git_main_branch)'
 alias gco='git checkout'
@@ -165,6 +165,10 @@ function getTriggerHosts() {
   else
     ~/aiq/aiq stack v2 list-hosts $env $stack trigger-execution | sort
   fi
+}
+
+function jira-create() {
+  jira issue create -s $1 -tStory --no-input | grep 'https://' | tr -d '\n' | tee >(pbcopy) 
 }
 
 alias parquet-dump='java -jar ~/dev/parquet-dump/target/scala-2.11/Parquet-Dump-assembly-1.1.1.jar'
