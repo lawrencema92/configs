@@ -168,7 +168,7 @@ function getTriggerHosts() {
 }
 
 function jira-create() {
-  jira issue create -s $1 -tStory --no-input | grep 'https://' | tr -d '\n' | tee >(pbcopy) 
+  jira issue create -p $1 -s $2 -tTask --no-input | grep 'https://' | tr -d '\n' | tee >(pbcopy) 
 }
 
 alias parquet-dump='java -jar ~/dev/parquet-dump/target/scala-2.11/Parquet-Dump-assembly-1.1.1.jar'
