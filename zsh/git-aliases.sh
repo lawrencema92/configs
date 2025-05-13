@@ -4,7 +4,8 @@ alias gap='git add --patch'
 alias gau='git add --update'
 
 function gct() {
-  git commit -m $1
+  local curr_branch=$(git symbolic-ref --short HEAD)
+  git commit -m "$curr_branch $1"
 }
 
 # Check if main exists and use instead of master

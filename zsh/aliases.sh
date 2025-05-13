@@ -20,7 +20,7 @@ function s3ls() {
     local key=$1
   fi
 
-  aws s3 ls --human-readable $key
+  aws s3 ls --human-readable --recursive --summarize $key
 }
 
 function s3stream() {
