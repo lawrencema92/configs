@@ -137,4 +137,18 @@ function jira-create() {
   jira issue create -p $1 -s $2 -tTask --no-input | grep 'https://' | tr -d '\n' | tee >(pbcopy) 
 }
 
+function extract_jira_id() {
+  input="$1"
+  
+  # Use grep with extended regex to find the ticket ID
+  match=$(echo "$input" | grep -Eo 'DIST[- ]?[0-9]+')
+
+  # Normalize to DIST-<number>
+  normalized=$(echo "$match" | sed -E 's/DIST[- ]?([0-9]+)/DIST-\1/')
+
+  echo $normalized
+}
+
 alias parquet-dump='java -jar ~/dev/parquet-dump/target/scala-2.11/Parquet-Dump-assembly-1.1.1.jar'
+
+export KCAT_DEFAULT_FMT='CreateTimestamp: %T \t Partition: %p \t Offset: %o\nKey: %k\nValue: %s\n\n'
