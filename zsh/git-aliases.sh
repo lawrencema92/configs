@@ -55,7 +55,7 @@ function create_worktree_from_jira() {
 
   # Get the repo name from the current directory
   local repo_name=$(basename "$(git rev-parse --show-toplevel)")
-  worktree_dir="~/ttdsrc/${repo_name}-worktrees/${final_branch_name}"
+  worktree_dir="$HOME/ttdsrc/${repo_name}-worktrees/${final_branch_name}"
 
   echo "Creating branch "$final_branch_name" in "$worktree_dir  
   # Create the worktree
