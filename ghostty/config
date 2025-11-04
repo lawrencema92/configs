@@ -55,6 +55,7 @@ quick-terminal-position = bottom
 shell-integration-features = title
 macos-dock-drop-behavior = window
 split-divider-color = #68838b
+font-size = 12
 
 window-padding-balance = true
 window-padding-x = 1,3
