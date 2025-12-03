@@ -60,6 +60,9 @@ function create_worktree_from_jira() {
   echo "Creating branch "$final_branch_name" in "$worktree_dir  
   # Create the worktree
   git worktree add $worktree_dir
+
+  
+  cd $worktree_dir
 }
 
 alias ghd='git symbolic-ref --short HEAD'

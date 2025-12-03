@@ -152,3 +152,4 @@ function extract_jira_id() {
 alias parquet-dump='java -jar ~/dev/parquet-dump/target/scala-2.11/Parquet-Dump-assembly-1.1.1.jar'
 
 export KCAT_DEFAULT_FMT='CreateTimestamp: %T \t Partition: %p \t Offset: %o\nKey: %k\nValue: %s\n\n'
+export KAFKA_CTL_CONFIG=/Users/lawrence.ma/dev/configs/kafkactl/config.yml

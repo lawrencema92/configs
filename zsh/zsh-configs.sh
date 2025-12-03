@@ -3,3 +3,4 @@ zstyle ':completion:*:scp:argument-rest:'    tag-order  hosts files users
 zstyle ':completion:*:(ssh|scp|rdp):*:hosts' hosts
 
 export FZF_DEFAULT_OPTS="--bind 'ctrl-y:execute-silent(echo {} | pbcopy)+accept'"
+export KAFKA_CTL_CONFIG=/Users/lawrence.ma/dev/configs/kafkactl/config.yml
