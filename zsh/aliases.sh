@@ -10,17 +10,32 @@ function convertEpoch() {
 }
 
 function s3ls() {
+  local human_readable=false
+  local recursive=false
+
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -h|--human-readable) human_readable=true; shift ;;
+      -r|--recursive) recursive=true; shift ;;
+      *) break ;;
+    esac
+  done
+
   if [[ $1 == s3://* ]]
   then
-    local key=$(echo $1 | sed 's/s3:\/\///')
+    local key=$1
   elif [[ $1 == s3a://* ]]
   then
-    local key=$(echo $1 | sed 's/s3a:\/\///')
+    local key=$(echo $1 | sed 's/s3a:\/\//s3:\/\//')
   else
-    local key=$1
+    local key="s3://$1"
   fi
 
-  aws s3 ls --human-readable --recursive --summarize $key
+  local -a args=(--summarize)
+  [[ $human_readable == true ]] && args+=(--human-readable)
+  [[ $recursive == true ]] && args+=(--recursive)
+
+  aws s3 ls "${args[@]}" $key
 }
 
 function s3stream() {
