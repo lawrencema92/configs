@@ -6,6 +6,14 @@
         "when": "textInputFocus"
     },
     {
+        "key": "cmd+b",
+        "command": "editor.action.revealDefinition"
+    },
+    {
+        "key": "cmd+shift+b",
+        "command": "editor.action.peekDefinition"
+    },
+    {
         "key": "cmd+o",
         "command": "workbench.action.quickOpen"
     },
