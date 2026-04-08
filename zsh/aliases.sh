@@ -155,11 +155,11 @@ function jira-create() {
 function extract_jira_id() {
   input="$1"
   
-  # Use grep with extended regex to find the ticket ID
-  match=$(echo "$input" | grep -Eo 'DIST[- ]?[0-9]+')
+  # Use grep with extended regex to find the ticket ID (DIST or HPC)
+  match=$(echo "$input" | grep -Eo '(DIST|HPC)[- ]?[0-9]+')
 
-  # Normalize to DIST-<number>
-  normalized=$(echo "$match" | sed -E 's/DIST[- ]?([0-9]+)/DIST-\1/')
+  # Normalize to PROJECT-<number>
+  normalized=$(echo "$match" | sed -E 's/(DIST|HPC)[- ]?([0-9]+)/\1-\2/')
 
   echo $normalized
 }
